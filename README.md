@@ -3,102 +3,99 @@
 ### Overview
 handy-sdk is a Python SDK for controlling the Handy device through its API. This SDK enables setting HAMP mode, adjusting speed, and configuring range parameters. It also includes an optional FastAPI server for remote control capabilities.
 
-### Installation
+Installation
+Clone the Repository:
 
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/C0d3ByJ0hn/handy-sdk.git
-   ```
-   
-2. **Navigate to the Project Directory**:
-   ```bash
-   cd handy-sdk
-   ```
+bash
+Copy code
+git clone https://github.com/C0d3ByJ0hn/handy-sdk.git
+Navigate to the Project Directory:
 
-3. **Install Dependencies**:
-   Install the necessary packages listed in `requirements.txt`.
-   ```bash
-   pip install -r requirements.txt
-   ```
+bash
+Copy code
+cd handy-sdk
+Install the SDK: Run the following command to install handy-sdk along with its dependencies:
 
-### Usage
+bash
+Copy code
+pip install -e .
+Install Additional Requirements: Ensure all dependencies in requirements.txt are installed:
 
-#### 1. Importing the SDK and Initial Setup
-   In your Python script, start by importing the necessary modules:
-   ```python
-   from handy_sdk import Handy
-   ```
+bash
+Copy code
+pip install -r requirements.txt
+Usage
+Basic Examples
+Initialize and Connect to the Handy Device: Start by initializing the SDK and connecting to the Handy device with your device key.
 
-#### 2. Connecting to the Handy Device
-   Initialize the SDK and connect to the Handy device:
-   ```python
-   handy = Handy()
-   handy.connect("YOUR_DEVICE_KEY")
-   ```
+python
+Copy code
+from handy_sdk import HandyAPI
 
-#### 3. Setting HAMP Mode
-   To put the Handy into HAMP mode and control speed and range:
-   ```python
-   # Set to HAMP mode
-   handy.set_hamp_mode()
+# Replace "YOUR_DEVICE_KEY" with the actual device key
+handy = HandyAPI("YOUR_DEVICE_KEY")
+Set the Handy to HAMP Mode:
 
-   # Set speed (adjust value as needed)
-   handy.set_hamp_velocity(speed=50)
-
-   # Set slide range
-   handy.set_hamp_slide(min_range=10, max_range=90)
-   ```
-
-#### 4. Starting and Stopping HAMP Mode
-   ```python
-   handy.start_hamp()
-   # Perform actions while in HAMP mode...
-   handy.stop_hamp()
-   ```
-
-### Optional: Running the FastAPI Server
-
-1. **Start the FastAPI Server**:
-   Run the FastAPI server to enable remote API access.
-   ```bash
-   uvicorn main:app --reload
-   ```
-
-2. **Access the API Endpoints**:
-   Once the server is running, use the following endpoints to control the Handy:
-   - **`/set_hamp_mode`**: Set the Handy to HAMP mode.
-   - **`/set_hamp_velocity`**: Adjust the speed in HAMP mode.
-   - **`/set_hamp_slide`**: Configure the slide range.
-   - **`/start_hamp`** and **`/stop_hamp`**: Start or stop HAMP mode.
-
-3. **Test the API**:
-   Go to `http://127.0.0.1:8000/docs` to access the API documentation and test the endpoints.
-
-### Example Script
-Here’s a quick example to bring everything together:
-
-```python
-from handy_sdk import Handy
-
-# Initialize and connect
-handy = Handy()
-handy.connect("YOUR_DEVICE_KEY")
-
-# Set up and start HAMP mode
+python
+Copy code
 handy.set_hamp_mode()
-handy.set_hamp_velocity(60)
-handy.set_hamp_slide(20, 80)
+Control HAMP Velocity: Adjust the speed of the Handy in HAMP mode. For example, set the speed to 50.
+
+python
+Copy code
+handy.set_hamp_velocity(velocity=50)
+Set the Slide Range: Define the minimum and maximum range for the Handy’s slide. This example sets it from 10 to 90.
+
+python
+Copy code
+handy.set_hamp_slide(min_value=10, max_value=90)
+Start and Stop HAMP Mode: To begin and end HAMP mode operations:
+
+python
+Copy code
+handy.start_hamp()
+# ... Perform actions while in HAMP mode ...
+handy.stop_hamp()
+Optional: Running the FastAPI Server
+The SDK includes an optional FastAPI server, allowing you to control the Handy device remotely through HTTP endpoints.
+
+Start the FastAPI Server: Run the following command to start the FastAPI server:
+
+bash
+Copy code
+uvicorn main:app --reload
+Access the API Endpoints: With the server running, you can access the following endpoints to control the Handy:
+
+/set_hamp_mode: Sets the Handy to HAMP mode.
+/start_hamp: Starts HAMP mode.
+/stop_hamp: Stops HAMP mode.
+/set_hamp_velocity: Adjusts the velocity in HAMP mode (requires a velocity parameter).
+/set_hamp_slide: Sets the slide range with min_value and max_value parameters.
+Test the API: Visit http://127.0.0.1:8000/docs to view and test the API endpoints with an interactive Swagger UI.
+
+Example Script
+Below is an example script demonstrating how to use handy-sdk to connect to the Handy, set it to HAMP mode, adjust settings, and start/stop the device.
+
+python
+Copy code
+from handy_sdk import HandyAPI
+
+# Initialize and connect to the Handy device
+handy = HandyAPI("YOUR_DEVICE_KEY")
+
+# Set Handy to HAMP mode
+handy.set_hamp_mode()
+
+# Configure speed and slide range
+handy.set_hamp_velocity(velocity=60)
+handy.set_hamp_slide(min_value=20, max_value=80)
+
+# Start HAMP mode
 handy.start_hamp()
 
-# Stop HAMP mode after a duration
+# Run for a few seconds, then stop
 import time
 time.sleep(5)
 handy.stop_hamp()
-```
-
-### License
-This SDK is open-source and available under the [MIT License](LICENSE).
-
----
-
-Met deze instructies kunnen gebruikers de SDK eenvoudig installeren, configureren en gebruiken voor verschillende toepassingen met de Handy.
+License
+This SDK is open-source and available under the MIT License.

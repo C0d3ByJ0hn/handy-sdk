@@ -1,0 +1,6 @@
+fastapi
+pydantic
+requests
+handy_sdk
+setuptools
+uvicorn

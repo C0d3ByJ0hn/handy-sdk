@@ -101,16 +101,16 @@ handy = HandyAPI("YOUR_DEVICE_KEY")
 # Set Handy to HAMP mode
 handy.set_hamp_mode()
 
+# Start HAMP mode
+handy.start_hamp()
+
 # Configure speed and slide range
 handy.set_hamp_velocity(velocity=60)
 handy.set_hamp_slide(min_value=20, max_value=80)
 
-# Start HAMP mode
-handy.start_hamp()
-
 # Run for a few seconds, then stop
 import time
-time.sleep(5)
+time.sleep(15)
 handy.stop_hamp()
 ```
 
